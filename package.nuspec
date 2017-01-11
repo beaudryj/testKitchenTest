@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>dsc-test</id>
+    <version>1.2</version>
+    <authors>Joe beaudry</authors>
+    <owners>no one</owners>
+    <projectUrl>http://localhost/testapp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Used to spin up a test-kitchen IIS box</description>
+    <releaseNotes> </releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>

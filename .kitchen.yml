@@ -1,0 +1,48 @@
+driver:
+  name: vagrant
+  communicator: winrm
+  gui: true
+
+
+transport:
+  name: winrm
+
+provisioner:
+    name: dsc
+    retry_on_exit_code:
+      - 35
+    dsc_local_configuration_manager_version: wmf5
+    dsc_local_configuration_manager:
+      action_after_reboot: StopConfiguration
+      reboot_if_needed: false
+      debug_mode: none
+      allow_module_overwrite: true
+    configuration_script_folder: examples
+    configuration_script: dsc_configuration.ps1
+    modules_from_gallery:
+      - name: xWebAdministration
+        requiredversion: 1.15.0.0
+        repository: PSGallery
+
+platforms:
+- name: win2012-wmf5-joe
+  driver:
+    synced_folders: 
+      - ["./Site", "C:/Websites"] 
+    box: win2012-wmf5-joe
+    network: 
+      - ["forwarded_port", {guest: 80, host: 8080}]
+  provisioner:
+    dsc_local_configuration_manager_version: wmf5
+
+verifier:
+  name: pester
+  test_folder: Tests
+
+suites:
+  - name: Sample_xWebsite
+    provisioner:
+    configuration_data:
+      AllNodes:
+        - nodename: localhost
+
